@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "qwebirc.autosave",
+  "version": "0.1.0",
+
+  "description": "Automatically save the IRC log of qwebirc.",
+  "icons": {"48": "icon48.png"},
+  "author": "yatemmma",
+
+  "permissions": ["tabs", "http://*/*", "https://*/*"],
+
+  "options_page" : "options.html",
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+ 
+  "page_action": {
+    "default_icon": "icon19.png",
+    "default_title": "qwebirc.autosave"
+  },
+
+  "content_scripts": [
+    {
+      "js": ["content_scripts.js"],
+      "matches": ["*://*/*"]
+    }
+  ],
+  
+  "web_accessible_resources": ["web_accessible_script.js"]
+}
