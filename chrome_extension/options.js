@@ -52,3 +52,12 @@ function deleteLogMessage(key) {
   localStorage.removeItem(key);
   loadMessages();
 }
+
+var $id = function(id) { return document.getElementById(id); }
+window.onload = function() {
+  $id("download-link").addEventListener("click", function(){
+    var value = $id("textarea").value;
+    var href = "data:application/octet-stream," + encodeURIComponent(value);
+    this.setAttribute("href", href);
+  }, false);
+}
