@@ -11,7 +11,7 @@
 
 function addBrigeElement() {
   var bridgeElement = document.createElement('div');
-  bridgeElement.id = "benry-bridge";
+  bridgeElement.id = "autosave-bridge";
   bridgeElement.style.display = "none";
   document.getElementsByTagName("body")[0].appendChild(bridgeElement);
 }

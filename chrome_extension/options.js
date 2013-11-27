@@ -2,6 +2,7 @@ $(function() {
   var url = loadOption("options-url") || "enter url";
   $("#url").val(url);
   $("#save-button").click(saveUrl);
+  $("#pre-link").click(onClickPreLink);
   loadMessages();
 });
 
@@ -46,6 +47,16 @@ function loadMessages() {
 function showLogMessage(key) {
   var messages = JSON.parse(localStorage[key] || null);
   $("#textarea").val(messages.join("\n"));
+  createDownloadLink(key);
+}
+
+function createDownloadLink(key) {
+  var words = key.split("-");
+  var title = words[2] + "_" + words[3];
+  $("#download-link").attr("download", title + ".txt");
+
+  var href = "data:application/octet-stream;," + encodeURIComponent($("#textarea").val());
+  $("#download-link").attr("href", href);
 }
 
 function deleteLogMessage(key) {
@@ -53,11 +64,6 @@ function deleteLogMessage(key) {
   loadMessages();
 }
 
-var $id = function(id) { return document.getElementById(id); }
-window.onload = function() {
-  $id("download-link").addEventListener("click", function(){
-    var value = $id("textarea").value;
-    var href = "data:application/octet-stream," + encodeURIComponent(value);
-    this.setAttribute("href", href);
-  }, false);
+function onClickPreLink() {
+  $("#textarea").val("<pre>\n" + $("#textarea").val() + "\n</pre>");
 }
