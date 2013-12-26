@@ -1,13 +1,14 @@
 $(function() {
-  var url = loadOption("options-url") || "enter url";
-  $("#url").val(url);
-  $("#save-button").click(saveUrl);
+  $("#url").val(loadOption("options-url") || "enter url");
+  $("#channels").val(loadOption("options-channels") || "");
+  $("#save-button").click(saveOptions);
   $("#pre-link").click(onClickPreLink);
   loadMessages();
 });
 
-function saveUrl() {
+function saveOptions() {
   saveOption("options-url", $("#url").val());
+  saveOption("options-channels", $("#channels").val());
   $("#saved").show();
   $("#saved").animate({opacity:"hide"}, {duration:1000, easing:"swing"});
 }

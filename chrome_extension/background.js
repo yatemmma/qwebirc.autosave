@@ -30,7 +30,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 
 function loadOptions() {
   var options = {
-    "url": localStorage["qwebirc.autosave-options-url"] || null
+    "url": localStorage["qwebirc.autosave-options-url"] || null,
+    "channels": localStorage["qwebirc.autosave-options-channels"] || null,
   };
   return options;
 }
