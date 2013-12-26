@@ -1,14 +1,24 @@
+var autoJoinFinished = false;
+var qwebircExec = null;
+
 (function() {
   if (!qwebirc) {
     return;
   }
-  var original = qwebirc.ui.Colourise;
+  var originalColourise = qwebirc.ui.Colourise;
   qwebirc.ui.Colourise = function() {
-    fireEventMessageReceived(arguments); original.apply(this, arguments);
+    fireEventMessageReceived(arguments);
+    originalColourise.apply(this, arguments);
+  };
+  var orgUserJoined = qwebirc.irc.IRCClient.prototype.userJoined;
+  qwebirc.irc.IRCClient.prototype.userJoined = function() {
+    fireEventUserJoined();
+    orgUserJoined.apply(this, arguments);
   };
 })();
 
 function fireEventMessageReceived(args) {
+  qwebircExec = args[2];
   var params = convertToJSON(args);
   if (params.channel === "Status") {
     return;
@@ -23,6 +33,27 @@ function fireEventMessageReceived(args) {
   var element = document.getElementById("autosave-bridge");
   element.innerText = JSON.stringify(params);
   element.dispatchEvent(customEvent);
+}
+
+function fireEventUserJoined() {
+  if (autoJoinFinished) {
+    return;
+  }
+  autoJoinFinished = true;
+  var customEvent = document.createEvent("HTMLEvents");
+  customEvent.initEvent("custom_event_user_joined", true, false);
+
+  var element = document.getElementById("autosave-bridge");
+  element.dispatchEvent(customEvent);
+
+  var channels = element.getAttribute("channels").split(" ");
+  channels.forEach(function(channel) {
+    setTimeout(function() {
+      if (channel.substr(0, 1) === "#") {
+        qwebircExec("/JOIN " + channel);
+      }
+    }, 3000);
+  });
 }
 
 function convertToJSON(args) {
