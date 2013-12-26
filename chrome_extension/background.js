@@ -6,7 +6,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   }
   chrome.pageAction.show(tabId);
   var now = new Date();
-  today = "" + now.getFullYear() + (now.getMonth() + 1) + now.getDate();
+  today = "" + now.getFullYear() + ("0"　+　(now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2);
 });
 
 chrome.pageAction.onClicked.addListener(function() {

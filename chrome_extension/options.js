@@ -62,7 +62,6 @@ function createDownloadLink(key) {
 
 function deleteLogMessage(key) {
   localStorage.removeItem(key);
-  loadMessages();
 }
 
 function onClickPreLink() {
