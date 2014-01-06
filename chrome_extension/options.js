@@ -1,4 +1,5 @@
 $(function() {
+  $("h1").text(chrome.app.getDetails().name + ' ' + chrome.app.getDetails().version);
   $("#url").val(loadOption("options-url") || "enter url");
   $("#channels").val(loadOption("options-channels") || "");
   $("#save-button").click(saveOptions);
