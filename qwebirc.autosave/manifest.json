@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "qwebirc.autosave",
-  "version": "0.3.2",
+  "version": "0.4.0",
 
   "description": "Automatically save the IRC log of qwebirc.",
   "icons": {"48": "icon48.png"},
