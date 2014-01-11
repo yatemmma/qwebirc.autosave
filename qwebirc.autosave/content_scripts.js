@@ -1,11 +1,15 @@
 (function() {
   chrome.extension.sendRequest({"action": "getOptions"}, function(options) {
-  	if (location.href.indexOf(options.url) === -1) {
+    if (location.href.indexOf(options.url) === -1) {
       return;
-  	}
+    }
     addBrigeElement(options);
     addOnDemandScript();
     addAutoSaveEventlisteners();
+    setTimeout(function() {
+      document.getElementById("loginnickname").value = options.nickname;
+      document.getElementById("loginchannels").value = options.channels;
+    }, 1000);
   });
 })();
 
@@ -13,7 +17,6 @@ function addBrigeElement(options) {
   var bridgeElement = document.createElement('div');
   bridgeElement.id = "autosave-bridge";
   bridgeElement.style.display = "none";
-  bridgeElement.setAttribute("channels", options.channels);
   document.getElementsByTagName("body")[0].appendChild(bridgeElement);
 }
 
@@ -33,9 +36,10 @@ function addAutoSaveEventlisteners() {
 }
 
 function onMessageReceived(event) {
+  var messageParams = JSON.parse(event.target.innerText);
   chrome.extension.sendRequest({
     "action": "saveMessage",
-    "params": JSON.parse(event.target.innerText)
+    "params": messageParams
   });
 }
 

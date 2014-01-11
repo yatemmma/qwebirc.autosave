@@ -11,8 +11,14 @@
     <label for="url">url:</label>
     <input type="text" id="url" name="url" value="" style="width:300px" />
     <br />
+    <label for="nickname">nickname:</label>
+    <input type="text" id="nickname" name="nickname" value="" style="width:300px" />
+    <br />
     <label for="channels">channels:</label>
     <input type="text" id="channels" name="channels" value="" style="width:300px" />
+    <br />
+    <label for="keywords">notification keywords:</label>
+    <input type="text" id="keywords" name="keywords" value="" style="width:300px" />
     <br />
     <button id="save-button">save</button>
     <span id="saved" style="display:none;">saved!</span>
@@ -22,8 +28,10 @@
   </div>
   <div style="float:left; width:500px; height:600px;">
     <p>
+      <span id="show-title"></span> 
       <a id="download-link" href="#">download</a> |
-      <a id="pre-link" href="#">pre</a>
+      <a id="pre-link" href="#">pre</a> |
+      <a id="title-link" href="#">title</a>
     </p>
     <textarea id="textarea" wrap="off" style="width:100%; height:100%;"></textarea>
   </div>
