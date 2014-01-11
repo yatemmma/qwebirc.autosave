@@ -45,15 +45,6 @@ function fireEventUserJoined() {
 
   var element = document.getElementById("autosave-bridge");
   element.dispatchEvent(customEvent);
-
-  var channels = element.getAttribute("channels").split(" ");
-  channels.forEach(function(channel) {
-    setTimeout(function() {
-      if (channel.substr(0, 1) === "#") {
-        qwebircExec("/JOIN " + channel);
-      }
-    }, 3000);
-  });
 }
 
 function convertToJSON(args) {

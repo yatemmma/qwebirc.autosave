@@ -1,15 +1,20 @@
 $(function() {
   $("h1").text(chrome.app.getDetails().name + ' ' + chrome.app.getDetails().version);
   $("#url").val(loadOption("options-url") || "enter url");
+  $("#nickname").val(loadOption("options-nickname") || "");
   $("#channels").val(loadOption("options-channels") || "");
+  $("#keywords").val(loadOption("options-keywords") || "");
   $("#save-button").click(saveOptions);
   $("#pre-link").click(onClickPreLink);
+  $("#title-link").click(onClickTitleLink);
   loadMessages();
 });
 
 function saveOptions() {
   saveOption("options-url", $("#url").val());
+  saveOption("options-nickname", $("#nickname").val());
   saveOption("options-channels", $("#channels").val());
+  saveOption("options-keywords", $("#keywords").val());
   $("#saved").show();
   $("#saved").animate({opacity:"hide"}, {duration:1000, easing:"swing"});
 }
@@ -50,6 +55,13 @@ function showLogMessage(key) {
   var messages = JSON.parse(localStorage[key] || null);
   $("#textarea").val(messages.join("\n"));
   createDownloadLink(key);
+  showTitle(key);
+}
+
+function showTitle(key) {
+  var words = key.split("-");
+  var title = words[2] + "_" + words[3];
+  $("#show-title").text(title);
 }
 
 function createDownloadLink(key) {
@@ -67,4 +79,8 @@ function deleteLogMessage(key) {
 
 function onClickPreLink() {
   $("#textarea").val("<pre>\n" + $("#textarea").val() + "\n</pre>");
+}
+
+function onClickTitleLink() {
+  $("#textarea").val($("#show-title").text() + "\n" + $("#textarea").val());
 }
