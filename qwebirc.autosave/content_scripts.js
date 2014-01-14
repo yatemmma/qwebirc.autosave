@@ -7,8 +7,13 @@
     addOnDemandScript();
     addAutoSaveEventlisteners();
     setTimeout(function() {
-      document.getElementById("loginnickname").value = options.nickname;
-      document.getElementById("loginchannels").value = options.channels;
+      if (document.getElementById("loginnickname")) {
+        document.getElementById("loginnickname").value = options.nickname;
+        document.getElementById("loginchannels").value = options.channels;
+      } else {
+        document.getElementsByTagName("input")[0].value = options.nickname;
+        document.getElementsByTagName("input")[1].value = options.channels;
+      }
     }, 1000);
   });
 })();

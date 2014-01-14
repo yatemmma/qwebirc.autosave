@@ -58,10 +58,14 @@ function notifyMessage(options, params) {
 }
 
 function sendNotification(title, message) {
-  chrome.notifications.create("", {   
-    type: "basic",
-    title: title,
-    message: message,
-    iconUrl: "icon48.png"
-  }, function(){});
+  if (chrome.notifications) {
+    chrome.notifications.create("id1", {   
+      type: "basic",
+      title: title,
+      message: message,
+      iconUrl: "icon48.png"
+    }, function(){});
+  } else {
+    window.webkitNotifications.createNotification("icon48.png", title, message).show();
+  }
 }
