@@ -4,6 +4,19 @@
   <meta charset="utf-8">
   <script src="jquery.2.0.3.js"></script>
   <script src="options.js"></script>
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <style>
+    label,input {
+      display: block;
+      width: 120px;
+      float: left;
+    }
+    label {
+      text-align: right;
+      padding-right: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <div style="float:left; width:500px;">
@@ -12,15 +25,15 @@
     <input type="text" id="url" name="url" value="" style="width:300px" />
     <br />
     <label for="nickname">nickname:</label>
-    <input type="text" id="nickname" name="nickname" value="" style="width:300px" />
+    <input  class="input-xlarge" type="text" id="nickname" name="nickname" value="" style="width:300px" />
     <br />
     <label for="channels">channels:</label>
     <input type="text" id="channels" name="channels" value="" style="width:300px" />
     <br />
-    <label for="keywords">notification keywords:</label>
+    <label for="keywords">keywords:</label>
     <input type="text" id="keywords" name="keywords" value="" style="width:300px" />
     <br />
-    <button id="save-button">save</button>
+    <button id="save-button">save changes</button>
     <span id="saved" style="display:none;">saved!</span>
 
     <h2>logs</h2>

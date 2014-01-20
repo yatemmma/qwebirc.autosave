@@ -2,12 +2,18 @@ var today;
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (tab.url.indexOf(loadOptions().url) === -1) {
-  	return;
+    return;
   }
   chrome.pageAction.show(tabId);
   var now = new Date();
-  today = "" + now.getFullYear() + ("0"　+　(now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2);
+  today = "" + now.getFullYear() + ("0" + (now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2);
 });
+
+function removeNotEnableNotice(tabId) {
+  chrome.tabs.insertCSS(tabId, {code: '{}'}, function(result) {
+    console.log(result);
+  });
+}
 
 chrome.pageAction.onClicked.addListener(function() {
   chrome.tabs.create({
@@ -49,17 +55,17 @@ function saveMessage(params) {
 function notifyMessage(options, params) {
   var message = params.message.replace(/^<.*> /, "");
   var keywords = options.keywords.split(",");
-  var matches = keywords.filter(function(keyword){
+  var matches = keywords.filter(function(keyword) {
     return message.match(keyword);
   });
   if (matches.length) {
-    sendNotification("qwebirc.autosave", "You got massage(s).");
+    sendNotification(params.channel, params.message);
   }
 }
 
 function sendNotification(title, message) {
   if (chrome.notifications) {
-    chrome.notifications.create("id1", {   
+    chrome.notifications.create("id1", {
       type: "basic",
       title: title,
       message: message,
