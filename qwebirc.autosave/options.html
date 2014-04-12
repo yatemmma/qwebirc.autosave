@@ -4,9 +4,8 @@
   <meta charset="utf-8">
   <script src="jquery.2.0.3.js"></script>
   <script src="options.js"></script>
-  <link href="bootstrap.min.css" rel="stylesheet">
   <style>
-    label,input {
+    label,input#options {
       display: block;
       width: 120px;
       float: left;
@@ -21,30 +20,31 @@
 <body>
   <div style="float:left; width:500px;">
     <h1>qwebirc.autosave</h1>
-    <label for="url">url:</label>
-    <input type="text" id="url" name="url" value="" style="width:300px" />
-    <br />
-    <label for="nickname">nickname:</label>
-    <input  class="input-xlarge" type="text" id="nickname" name="nickname" value="" style="width:300px" />
-    <br />
-    <label for="channels">channels:</label>
-    <input type="text" id="channels" name="channels" value="" style="width:300px" />
-    <br />
-    <label for="keywords">keywords:</label>
-    <input type="text" id="keywords" name="keywords" value="" style="width:300px" />
-    <br />
-    <button id="save-button">save changes</button>
-    <span id="saved" style="display:none;">saved!</span>
-
+    <div id="options">
+      <label for="url">url:</label>
+      <input type="text" id="url" name="url" value="" style="width:300px" />
+      <br />
+      <label for="nickname">nickname:</label>
+      <input  class="input-xlarge" type="text" id="nickname" name="nickname" value="" style="width:300px" />
+      <br />
+      <label for="channels">channels:</label>
+      <input type="text" id="channels" name="channels" value="" style="width:300px" />
+      <br />
+      <label for="keywords">keywords:</label>
+      <input type="text" id="keywords" name="keywords" value="" style="width:300px" />
+      <br />
+      <button id="save-button">save changes</button>
+      <span id="saved" style="display:none;">saved!</span>
+    </div>
     <h2>logs</h2>
+    <button id="delete-button">delete</button><input type="checkbox" id="delete-all" /> all 
     <ul id="logs"></ul>
   </div>
   <div style="float:left; width:500px; height:600px;">
     <p>
       <span id="show-title"></span> 
       <a id="download-link" href="#">download</a> |
-      <a id="pre-link" href="#">pre</a> |
-      <a id="title-link" href="#">title</a>
+      <a id="pre-link" href="#">pre</a>
     </p>
     <textarea id="textarea" wrap="off" style="width:100%; height:100%;"></textarea>
   </div>

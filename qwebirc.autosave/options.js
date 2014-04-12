@@ -6,7 +6,10 @@ $(function() {
   $("#keywords").val(loadOption("options-keywords") || "");
   $("#save-button").click(saveOptions);
   $("#pre-link").click(onClickPreLink);
-  $("#title-link").click(onClickTitleLink);
+  $('#delete-all').on('change', function() {
+    $('input[name=check]').prop('checked', this.checked);
+  });
+  $("#delete-button").click(deleteLogMessages);
   loadMessages();
 });
 
@@ -38,16 +41,12 @@ function loadMessages() {
       return;
     }
     var logTitleStyle = "text-decoration:underline; cursor:pointer;";
+    var check = '<input type="checkbox" name="check" value=' +  key + ' />';
     var title = "<span class='log-title' style='" + logTitleStyle + "' key='" + key + "'>" + words[2] + " " + words[3] + "</span>";
-    var deleteButton = "<button class='delete-button' key='" + key + "'>delete</button>"
-    $("#logs").append("<li>" + title + " " + deleteButton + "</li>");
+    $("#logs").append("<li>" + check + " " + title + "</li>");
   });
   $(".log-title").click(function() {
     showLogMessage($(this).attr("key"));
-  });
-  $(".delete-button").click(function() {
-    deleteLogMessage($(this).attr("key"));
-    $(this).parent().animate({opacity:"hide"}, {duration:1000, easing:"swing"});
   });
 }
 
@@ -73,14 +72,24 @@ function createDownloadLink(key) {
   $("#download-link").attr("href", href);
 }
 
+function deleteLogMessages() {
+  var $checked = $('input[name=check]:checked');
+  if ($checked.length == 0 || !confirm('delete log messages?')) {
+    return false;
+  }
+  $checked.each(function() {
+    deleteLogMessage($(this).val());
+    $(this).parent().animate({opacity:"hide"}, 1000, "swing", function() {
+      $(this).parent().remove();
+    });
+  });
+}
+
 function deleteLogMessage(key) {
   localStorage.removeItem(key);
 }
 
 function onClickPreLink() {
   $("#textarea").val("<pre>\n" + $("#textarea").val() + "\n</pre>");
-}
-
-function onClickTitleLink() {
   $("#textarea").val($("#show-title").text() + "\n" + $("#textarea").val());
 }
