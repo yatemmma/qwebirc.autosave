@@ -1,7 +1,7 @@
 var options = {
   nickname: 'aiueo', channels: '#aiueo'
 };
-setTimeout(function() {
+setTimeout(()=>{
   if (document.getElementById("loginnickname")) {
     document.getElementById("loginnickname").value = options.nickname;
     document.getElementById("loginchannels").value = options.channels;
