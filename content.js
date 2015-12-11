@@ -11,17 +11,19 @@ setTimeout(()=>{
   }
 }, 1000);
 
-
 var ipcRenderer = require('electron').ipcRenderer;
 ipcRenderer.on('asynchronous-reply', function(event, arg) {
   // TODO: do something
   console.log(arg);
   alert(arg);
 });
+var ipcRenderer = require('electron').ipcRenderer;
+// ipcRenderer.sendToHost('ipc-message');
 
 var originalColourise = qwebirc.ui.Colourise;
 qwebirc.ui.Colourise = function() {
-  ipcRenderer.send('asynchronous-message', arguments);
+  // ipcRenderer.send('asynchronous-message', arguments);
+  ipcRenderer.sendToHost('ipc-message', arguments);
   originalColourise.apply(this, arguments);
 };
 
