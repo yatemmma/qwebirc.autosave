@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>setting</title>
+  <style>
+    label,input#setting {
+      display: block;
+      width: 120px;
+      float: left;
+    }
+    label {
+      text-align: right;
+      padding-right: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="setting">
+  <label for="url">url:</label>
+  <input type="text" id="url" name="url" value="" />
+  <br />
+  <label for="nickname">nickname:</label>
+  <input  class="input-xlarge" type="text" id="nickname" name="nickname" value="" />
+  <br />
+  <label for="channels">channels:</label>
+  <input type="text" id="channels" name="channels" value="" />
+  <br />
+  <label for="keywords">keywords:</label>
+  <input type="text" id="keywords" name="keywords" value="" />
+</div>
+
+<script>
+
+var inputs = Array.prototype.slice.call(document.querySelectorAll('input'));
+inputs.forEach((item)=>{
+  item.addEventListener('input', (x)=>{
+    console.log(x.target.id);
+    console.log(x.target.value);
+    localStorage['setting-'+x.target.id] = x.target.value;
+  });
+});
+
+window.onload = ()=>{
+  inputs.forEach((item)=>{
+    console.log(localStorage);
+    var value = localStorage['setting-'+item.id] || "";
+    item.value = value;
+  });
+};
+
+
+</script>
+</body>
+</html>

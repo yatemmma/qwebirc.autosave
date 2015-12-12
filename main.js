@@ -40,4 +40,44 @@ app.on('ready', ()=>{
     // TODO: receive message
     console.log(arg['0']);
   });
+  
+  setMenu();
 });
+
+function setMenu() {
+  var template = [{
+    label: 'Setting',
+    submenu: [{
+        label: 'Setting',
+        click: openSettingWindow
+      }, {
+        label: 'Log',
+        click: function() {
+          alert(456);
+        }
+      }]
+  }];
+
+  if (process.platform == 'darwin') {
+    template.unshift({
+      label: 'qwebirc-client',
+      submenu: [{
+          label: 'Quit',
+          accelerator: 'Command+Q',
+          click: function() { app.quit(); }
+        }]
+    });
+  }
+  var Menu = require('menu');
+  var menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+}
+
+function openSettingWindow() {
+  var window = new BrowserWindow({ width: 500, height: 300});
+  window.openDevTools();
+  window.loadURL('file://' + __dirname + '/setting.html');
+  window.on('closed', ()=>{
+    window = null;
+  });
+}

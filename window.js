@@ -1,3 +1,4 @@
+
 var loginOptions = {
   nickname: 'aiueo', channels: '#aiueo'
 };

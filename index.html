@@ -3,13 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>qwebirc client</title>
+  <style>
+    body {
+      position: absolute;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #qwebirc {
+      display: block;
+      width: 100%;
+      height: 100%;
+      float: left;
+    }
+  </style>
 </head>
 
 <body>
-<h1>qwebirc client</h1>
 
-<webview id="qwebirc" nodeintegration src="http://webchat.quakenet.org/?channels=dev" style="display:inline-block; width:640px; height:480px"></webview>
+<webview id="qwebirc" nodeintegration src="http://webchat.quakenet.org/?channels=dev"></webview>
 
+<div id="subview">
+  list (search channel:xxxx date:xxxx word)
+    Settings (username, channels, highlight)
+    log
+</div>
+<div id="tes"></div>
 <script src="window.js"></script>
 </body>
 </html>
