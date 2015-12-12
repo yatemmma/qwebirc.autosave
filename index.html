@@ -1,27 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Electron Read Us</title>
+  <meta charset="UTF-8">
+  <title>qwebirc client</title>
 </head>
+
 <body>
-<h1>Hello, electron!</h1>
+<h1>qwebirc client</h1>
 
-<webview id="foo" nodeintegration src="http://webchat.quakenet.org/?channels=dev" style="display:inline-block; width:640px; height:480px"></webview>
-<script>
-var webview = document.getElementById("foo");
-webview.addEventListener('did-finish-load', ()=>{
-  require('fs').readFile('./content.js', 'utf8', (err, text)=>{
-    webview.executeJavaScript(text);
-  });
-});
-webview.addEventListener("dom-ready", function() {
-  webview.openDevTools();
-});
-webview.addEventListener('ipc-message', function(event) {
-  console.log(event);
-});
-</script>
+<webview id="qwebirc" nodeintegration src="http://webchat.quakenet.org/?channels=dev" style="display:inline-block; width:640px; height:480px"></webview>
 
+<script src="window.js"></script>
 </body>
 </html>

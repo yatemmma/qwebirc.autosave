@@ -1,24 +1,4 @@
-var options = {
-  nickname: 'aiueo', channels: '#aiueo'
-};
-setTimeout(()=>{
-  if (document.getElementById("loginnickname")) {
-    document.getElementById("loginnickname").value = options.nickname;
-    document.getElementById("loginchannels").value = options.channels;
-  } else {
-    document.getElementsByTagName("input")[0].value = options.nickname;
-    document.getElementsByTagName("input")[1].value = options.channels;
-  }
-}, 1000);
-
 var ipcRenderer = require('electron').ipcRenderer;
-ipcRenderer.on('asynchronous-reply', function(event, arg) {
-  // TODO: do something
-  console.log(arg);
-  alert(arg);
-});
-var ipcRenderer = require('electron').ipcRenderer;
-// ipcRenderer.sendToHost('ipc-message');
 
 var originalColourise = qwebirc.ui.Colourise;
 qwebirc.ui.Colourise = function() {
@@ -31,3 +11,13 @@ var orgUserJoined = qwebirc.irc.IRCClient.prototype.userJoined;
 qwebirc.irc.IRCClient.prototype.userJoined = function() {
   orgUserJoined.apply(this, arguments);
 };
+
+ipcRenderer.on('login-support', function(event, arg) {
+  if (document.getElementById("loginnickname")) {
+    document.getElementById("loginnickname").value = arg.nickname;
+    document.getElementById("loginchannels").value = arg.channels;
+  } else {
+    document.getElementsByTagName("input")[0].value = arg.nickname;
+    document.getElementsByTagName("input")[1].value = arg.channels;
+  }
+});
