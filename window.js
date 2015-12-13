@@ -1,8 +1,10 @@
-var history = require('./history.js');
+var history1 = require('./history.js');
 var loginOptions = {
   nickname: localStorage['setting-nickname'] || '',
   channels: localStorage['setting-channels'] || ''
 };
+var remote = require('remote');
+var app = remote.require('app');
 
 var webview = document.getElementById("qwebirc");
 
@@ -36,7 +38,6 @@ webview.addEventListener('ipc-message', function(event) {
   } else if (message.indexOf("<") == 0) {
     searchWord = message.replace(/15qwebirc:\/\/whois\/([^\/]*)\//, "");
     message = message.replace(/15qwebirc:\/\/whois\/([^\/]*)\//, "$1");
-    console.log(searchWord);
     var keywords = (localStorage['setting-keywords'] || '').split(',').map((x)=>{
       return x.trim();
     });
@@ -52,13 +53,9 @@ webview.addEventListener('ipc-message', function(event) {
   var key = date + channel;
   console.log(new Date(event.timeStamp).toISOString());
   console.log(key + ' | ' + message);
-  // history.save(key, message);
+  // history1.save(key, message); indexed DBにする
 });
 
 function notifyKeyword(channel, message, word) {
-  // alert(message);
-  var option = {
-    body: message
-  }
-  new Notification("qwebirc-client: " + channel, option);
+  new Notification("qwebirc-client: " + channel, {body: message});
 }
