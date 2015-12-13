@@ -51,10 +51,8 @@ function setMenu() {
         label: 'Setting',
         click: openSettingWindow
       }, {
-        label: 'Log',
-        click: function() {
-          alert(456);
-        }
+        label: 'History',
+        click: openHistoryWindow
       }]
   }];
 
@@ -74,6 +72,15 @@ function setMenu() {
 }
 
 function openSettingWindow() {
+  var window = new BrowserWindow({ width: 500, height: 300});
+  window.openDevTools();
+  window.loadURL('file://' + __dirname + '/setting.html');
+  window.on('closed', ()=>{
+    window = null;
+  });
+}
+
+function openHistoryWindow() {
   var window = new BrowserWindow({ width: 500, height: 300});
   window.openDevTools();
   window.loadURL('file://' + __dirname + '/setting.html');

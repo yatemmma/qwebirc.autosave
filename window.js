@@ -16,7 +16,7 @@ webview.addEventListener('did-finish-load', ()=>{
 });
 
 webview.addEventListener("dom-ready", function() {
-  webview.openDevTools();
+  // webview.openDevTools();
 });
 
 webview.addEventListener('ipc-message', function(event) {
@@ -53,7 +53,11 @@ webview.addEventListener('ipc-message', function(event) {
   var key = date + channel;
   console.log(new Date(event.timeStamp).toISOString());
   console.log(key + ' | ' + message);
-  // history1.save(key, message); indexed DBにする
+  history1.save({
+    key: dateTime,
+    channel: channel,
+    message: message
+  });
 });
 
 function notifyKeyword(channel, message, word) {
