@@ -24,7 +24,7 @@
   <input type="text" id="url" name="url" value="" />
   <br />
   <label for="nickname">nickname:</label>
-  <input  class="input-xlarge" type="text" id="nickname" name="nickname" value="" />
+  <input type="text" id="nickname" name="nickname" value="" />
   <br />
   <label for="channels">channels:</label>
   <input type="text" id="channels" name="channels" value="" />
@@ -34,25 +34,19 @@
 </div>
 
 <script>
-
 var inputs = Array.prototype.slice.call(document.querySelectorAll('input'));
 inputs.forEach((item)=>{
   item.addEventListener('input', (x)=>{
-    console.log(x.target.id);
-    console.log(x.target.value);
     localStorage['setting-'+x.target.id] = x.target.value;
   });
 });
 
 window.onload = ()=>{
   inputs.forEach((item)=>{
-    console.log(localStorage);
     var value = localStorage['setting-'+item.id] || "";
     item.value = value;
   });
 };
-
-
 </script>
 </body>
 </html>
