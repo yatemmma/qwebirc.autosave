@@ -13,7 +13,7 @@ app.on('window-all-closed', ()=>{
 
 app.on('ready', ()=>{
   mainWindow = new BrowserWindow({ width: 800, height: 600});
-  mainWindow.openDevTools();
+  // mainWindow.openDevTools();
   mainWindow.loadURL('file://' + __dirname + '/index.html');
   mainWindow.on('closed', ()=>{
     mainWindow = null;
@@ -80,7 +80,7 @@ function setMenu() {
 
 function openSettingWindow() {
   var window = new BrowserWindow({ width: 500, height: 300});
-  window.openDevTools();
+  // window.openDevTools();
   window.loadURL('file://' + __dirname + '/setting.html');
   window.on('closed', ()=>{
     window = null;
@@ -89,7 +89,7 @@ function openSettingWindow() {
 
 function openHistoryWindow() {
   var window = new BrowserWindow({ width: 1000, height: 500});
-  window.openDevTools();
+  // window.openDevTools();
   window.loadURL('file://' + __dirname + '/history.html');
   window.on('closed', ()=>{
     window = null;
