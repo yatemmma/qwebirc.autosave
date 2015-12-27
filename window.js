@@ -34,9 +34,10 @@ webview.addEventListener('ipc-message', function(event) {
   }).join('');
   
   if (message.indexOf("4==") == 0) {
-    message = message.replace(/4== qwebirc:\/\/whois\/([^\/]*)\//, '== ' + "$1");
+    // message = message.replace(/4== qwebirc:\/\/whois\/([^\/]*)\//, '== ' + "$1");
+    return;
   } else if (message.indexOf("<") == 0) {
-    searchWord = message.replace(/15qwebirc:\/\/whois\/([^\/]*)\//, "");
+    searchWord = message.replace(/15@qwebirc:\/\/whois\/([^\/]*)\//, "");
     message = message.replace(/15qwebirc:\/\/whois\/([^\/]*)\//, "$1");
     var keywords = (localStorage['setting-keywords'] || '').split(',').map((x)=>{
       return x.trim();
@@ -55,6 +56,7 @@ webview.addEventListener('ipc-message', function(event) {
   console.log(key + ' | ' + message);
   history1.save({
     key: dateTime,
+    date: date,
     channel: channel,
     message: message
   });

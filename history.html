@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>history</title>
+  <style>
+    body {
+      font-family: 'メイリオ', Meiryo, -apple-system, Sans-Serif;
+    }
+    #logs {
+      width: 20%;
+      float: left;
+    }
+    #logs li:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    #messages {
+    }
+  </style>
+</head>
+
+<body>
+
+<ul id="logs">
+</ul>
+
+<div id="messages">
+</div>
+
+<script>
+window.onload = function() {
+  var history1 = require('./history.js');
+  setTimeout(()=>{
+    var keys = history1.loadAllKeys();
+    keys.forEach((key)=>{
+      var li = document.createElement("li");
+      li.textContent = key;
+      li.addEventListener('click', ()=>{
+        var text = history1.load(key);
+        document.getElementById('messages').innerHTML = text.replace(/\n/g, '<br>');
+      });
+      document.getElementById('logs').appendChild(li);
+    }); 
+  }, 1000);
+};
+</script>
+</body>
+</html>

@@ -81,9 +81,9 @@ function openSettingWindow() {
 }
 
 function openHistoryWindow() {
-  var window = new BrowserWindow({ width: 500, height: 300});
+  var window = new BrowserWindow({ width: 1000, height: 500});
   window.openDevTools();
-  window.loadURL('file://' + __dirname + '/setting.html');
+  window.loadURL('file://' + __dirname + '/history.html');
   window.on('closed', ()=>{
     window = null;
   });
