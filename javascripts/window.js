@@ -1,19 +1,28 @@
-var history1 = require('./history.js');
+const url = 'http://webchat.quakenet.org/?channels=dev';
+
+var history1 = require('./javascripts/history.js');
 var loginOptions = {
   nickname: localStorage['setting-nickname'] || '',
   channels: localStorage['setting-channels'] || ''
 };
+
 var remote = require('remote');
 var app = remote.require('app');
 
-var webview = document.getElementById("qwebirc");
-
+// <webview id="qwebirc" nodeintegration src=""></webview>
+var webview = document.createElement('webview');
+webview.setAttribute('id', 'qwebirc');
+webview.setAttribute('nodeintegration', true);
+// var webview = document.getElementById("qwebirc");
+webview.setAttribute('src', localStorage['setting-url'] || url);
 webview.addEventListener('did-finish-load', ()=>{
-  require('fs').readFile('./content.js', 'utf8', (err, text)=>{
+  require('fs').readFile('./javascripts/content.js', 'utf8', (err, text)=>{
     webview.executeJavaScript(text);
     webview.send('login-support', loginOptions);
+    // webview.openDevTools();
   });
 });
+document.getElementsByTagName('body')[0].appendChild(webview);
 
 webview.addEventListener("dom-ready", function() {
   // webview.openDevTools();

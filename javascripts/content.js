@@ -1,4 +1,4 @@
-var ipcRenderer = require('electron').ipcRenderer;
+ipcRenderer = require('electron').ipcRenderer;
 
 var originalColourise = qwebirc.ui.Colourise;
 qwebirc.ui.Colourise = function() {
